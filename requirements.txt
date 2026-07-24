@@ -1,0 +1,33 @@
+# Web Framework
+dash==2.14.0
+dash-bootstrap-components==1.5.0
+plotly==5.18.0
+gunicorn==21.2.0
+
+# Data Processing
+pandas==2.0.3
+numpy==1.24.3
+
+# Web Scraping
+requests==2.31.0
+beautifulsoup4==4.12.2
+lxml==4.9.3
+fake-useragent==1.4.0
+
+# NLP (lightweight)
+textblob==0.17.1
+nltk==3.8.1
+
+# Utilities
+python-dotenv==1.0.0
+schedule==1.2.0
+pdfplumber==0.10.3
+
+# API & GitHub
+PyGithub==1.59.0
+
+# CORS
+cors==1.0.1
+
+# Testing (optional)
+pytest==7.4.0
