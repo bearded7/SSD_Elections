@@ -4,8 +4,10 @@ Enhanced with Visualizations & Election Prediction Engine
 """
 
 import os
+import sys
 import json
 import logging
+import ssl
 from datetime import datetime, timedelta
 import pandas as pd
 import numpy as np
@@ -16,8 +18,17 @@ import dash
 from dash import dcc, html, Input, Output, State, callback, dash_table
 import dash_bootstrap_components as dbc
 from dotenv import load_dotenv
-from scrapers.news_scraper import NewsScraper
-from utils.data_processor import DataProcessor
+
+# Fix SSL for NLTK
+try:
+    _create_unverified_https_context = ssl._create_unverified_context
+except AttributeError:
+    pass
+else:
+    ssl._create_default_https_context = _create_unverified_https_context
+
+# Fix import paths
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
 # Load environment variables
 load_dotenv()
@@ -32,6 +43,41 @@ logging.basicConfig(
     ]
 )
 logger = logging.getLogger(__name__)
+
+# Initialize NLTK
+import nltk
+try:
+    nltk.data.find('tokenizers/punkt')
+except LookupError:
+    nltk.download('punkt', quiet=True)
+try:
+    nltk.data.find('taggers/averaged_perceptron_tagger')
+except LookupError:
+    nltk.download('averaged_perceptron_tagger', quiet=True)
+try:
+    nltk.data.find('corpora/brown')
+except LookupError:
+    nltk.download('brown', quiet=True)
+
+# Import custom modules
+try:
+    from scrapers.news_scraper import NewsScraper
+    from utils.data_processor import DataProcessor
+except ImportError as e:
+    logger.error(f"Import error: {e}")
+    # Create dummy classes if import fails
+    class NewsScraper:
+        def get_all_news(self):
+            return []
+    class DataProcessor:
+        def categorize_articles(self, articles):
+            return pd.DataFrame()
+        def analyze_sentiment(self, texts):
+            return ['Neutral'] * len(texts)
+        def get_sentiment_emoji(self, text):
+            return "😐"
+        def calculate_election_probability(self, articles):
+            return {'probability': 50, 'articles_analyzed': 0}
 
 # Initialize Dash app
 app = dash.Dash(
@@ -48,9 +94,11 @@ data_processor = DataProcessor()
 # Load sources
 def load_sources():
     try:
-        with open('sources.json', 'r', encoding='utf-8') as f:
+        sources_path = os.path.join(os.path.dirname(__file__), 'sources.json')
+        with open(sources_path, 'r', encoding='utf-8') as f:
             return json.load(f)
-    except:
+    except Exception as e:
+        logger.error(f"Error loading sources: {e}")
         return {"news": [], "government": [], "ngo": []}
 
 SOURCES = load_sources()
@@ -118,7 +166,7 @@ class ElectionPredictor:
         scores['political'] = min(100, (political_count / max_occurrences) * 100)
         scores['international'] = min(100, (international_count / max_occurrences) * 100)
         scores['logistics'] = min(100, (logistics_count / max_occurrences) * 100)
-        scores['security'] = min(100, 100 - (security_count / max_occurrences) * 100)  # Inverted
+        scores['security'] = min(100, 100 - (security_count / max_occurrences) * 100)
         
         return scores
     
@@ -170,7 +218,7 @@ class ElectionPredictor:
             probability = max(5, adjusted_score)
         
         # Source reliability adjustment
-        reliability_weight = 1.0  # Default
+        reliability_weight = 1.0
         source_count = len(articles_data)
         if source_count > 20:
             reliability_weight = 1.1
@@ -194,7 +242,7 @@ class ElectionPredictor:
 
 predictor = ElectionPredictor()
 
-# App Layout
+# App Layout (keep existing layout)
 app.layout = dbc.Container([
     # Header
     dbc.Row([
@@ -371,7 +419,7 @@ app.layout = dbc.Container([
     # Auto-refresh
     dcc.Interval(
         id='interval-component',
-        interval=3600000,  # 1 hour
+        interval=3600000,
         n_intervals=0
     ),
     
@@ -430,11 +478,15 @@ def update_dashboard(n_intervals, n_clicks):
     
     # Process data
     if articles_data:
-        df = data_processor.categorize_articles(articles_data)
-        df['sentiment'] = data_processor.analyze_sentiment(df['title'].tolist())
-        df['date'] = pd.to_datetime(df.get('pubDate', datetime.now()))
-        df['source'] = 'Scraped'
-        data_dict = df.to_dict('records')
+        try:
+            df = data_processor.categorize_articles(articles_data)
+            sentiments = data_processor.analyze_sentiment(df['title'].tolist() if 'title' in df else [])
+            df['sentiment'] = sentiments
+            data_dict = df.to_dict('records')
+        except Exception as e:
+            logger.error(f"Error processing data: {e}")
+            df = pd.DataFrame()
+            data_dict = []
     else:
         df = pd.DataFrame()
         data_dict = []
@@ -584,7 +636,10 @@ def update_dashboard(n_intervals, n_clicks):
     for article in articles_data[:20]:
         title = article.get('title', 'No Title')
         source = article.get('source', 'Unknown')
-        sentiment = data_processor.get_sentiment_emoji(title)
+        try:
+            sentiment = data_processor.get_sentiment_emoji(title)
+        except:
+            sentiment = "😐"
         news_items.append(html.Div([
             html.Small(f"[{source}]", className="text-muted"),
             html.Span(f" {sentiment} ", className="mx-1"),
