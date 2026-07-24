@@ -14,7 +14,7 @@ beautifulsoup4==4.12.2
 lxml==4.9.3
 fake-useragent==1.4.0
 
-# NLP (lightweight)
+# NLP & Sentiment
 textblob==0.17.1
 nltk==3.8.1
 
@@ -29,5 +29,5 @@ PyGithub==1.59.0
 # CORS
 cors==1.0.1
 
-# Testing (optional)
+# Testing
 pytest==7.4.0
