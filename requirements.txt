@@ -1,12 +1,12 @@
-# Web Framework
+# Web Framework - Updated for Python 3.11 compatibility
 dash==2.14.0
 dash-bootstrap-components==1.5.0
 plotly==5.18.0
 gunicorn==21.2.0
 
-# Data Processing
-pandas==2.0.3
-numpy==1.24.3
+# Data Processing - Fixed version for Python 3.11
+pandas==2.1.4
+numpy==1.26.2
 
 # Web Scraping
 requests==2.31.0
@@ -31,3 +31,7 @@ cors==1.0.1
 
 # Testing
 pytest==7.4.0
+
+# Required dependencies
+setuptools==68.2.2
+wheel==0.41.3
