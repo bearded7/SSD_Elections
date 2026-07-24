@@ -1,0 +1,210 @@
+{
+  "news": [
+    {
+      "name": "Radio Tamazuj",
+      "url": "https://radiotamazuj.org/en/",
+      "rss": "https://radiotamazuj.org/en/feed/",
+      "type": "news",
+      "country": "South Sudan"
+    },
+    {
+      "name": "Eye Radio Juba",
+      "url": "https://eyeradio.org/",
+      "rss": "https://eyeradio.org/feed/",
+      "type": "news",
+      "country": "South Sudan"
+    },
+    {
+      "name": "Sudans Post",
+      "url": "https://www.sudanspost.com/",
+      "rss": "https://www.sudanspost.com/feed/",
+      "type": "news",
+      "country": "South Sudan"
+    },
+    {
+      "name": "The City Review",
+      "url": "https://thecityreview.com/",
+      "rss": "https://thecityreview.com/feed/",
+      "type": "news",
+      "country": "South Sudan"
+    },
+    {
+      "name": "Gurtong",
+      "url": "http://www.gurtong.net/",
+      "rss": "http://www.gurtong.net/RSS/RSSNews.aspx",
+      "type": "news",
+      "country": "South Sudan"
+    },
+    {
+      "name": "South Sudan News Agency",
+      "url": "https://www.southsudannewsagency.com/",
+      "rss": "https://www.southsudannewsagency.com/feed/",
+      "type": "news",
+      "country": "South Sudan"
+    },
+    {
+      "name": "Hot in Juba",
+      "url": "https://hotinjuba.com/",
+      "rss": "https://hotinjuba.com/feed/",
+      "type": "news",
+      "country": "South Sudan"
+    },
+    {
+      "name": "Xinhua Africa",
+      "url": "https://www.xinhuanet.com/english/africa/",
+      "rss": "http://www.xinhuanet.com/english/africa/index.xml",
+      "type": "news",
+      "country": "China"
+    },
+    {
+      "name": "BBC Africa",
+      "url": "https://www.bbc.com/news/world/africa",
+      "rss": "http://feeds.bbci.co.uk/news/world/africa/rss.xml",
+      "type": "news",
+      "country": "UK"
+    },
+    {
+      "name": "Reuters Africa",
+      "url": "https://www.reuters.com/world/africa/",
+      "rss": "https://www.reuters.com/world/africa/?format=rss",
+      "type": "news",
+      "country": "Global"
+    }
+  ],
+  "government": [
+    {
+      "name": "NEC South Sudan",
+      "url": "https://necss.gov.ss",
+      "type": "official",
+      "category": "electoral"
+    },
+    {
+      "name": "SSBC",
+      "url": "https://ssbc.gov.ss",
+      "type": "official",
+      "category": "broadcasting"
+    },
+    {
+      "name": "Political Parties Council",
+      "url": "https://ppc.gov.ss",
+      "type": "official",
+      "category": "political"
+    }
+  ],
+  "ngo": [
+    {
+      "name": "UNMISS",
+      "url": "https://unmiss.unmissions.org",
+      "rss": "https://unmiss.unmissions.org/rss.xml",
+      "type": "ngo",
+      "category": "peacekeeping"
+    },
+    {
+      "name": "FES South Sudan",
+      "url": "https://www.fes-sudans.org",
+      "type": "ngo",
+      "category": "research"
+    },
+    {
+      "name": "PeaceRep",
+      "url": "https://peacerep.org/research/south-sudan/",
+      "type": "ngo",
+      "category": "research"
+    },
+    {
+      "name": "International Crisis Group",
+      "url": "https://www.crisisgroup.org/africa/horn-africa/south-sudan",
+      "type": "ngo",
+      "category": "research"
+    },
+    {
+      "name": "UNDP South Sudan",
+      "url": "https://www.undp.org/south-sudan",
+      "type": "ngo",
+      "category": "development"
+    },
+    {
+      "name": "Human Rights Watch",
+      "url": "https://www.hrw.org/africa/south-sudan",
+      "type": "ngo",
+      "category": "human_rights"
+    }
+  ],
+  "social_media": [
+    {
+      "name": "Twitter/X",
+      "type": "social_media",
+      "api_endpoint": "https://api.twitter.com/2",
+      "rate_limit": 300
+    },
+    {
+      "name": "Facebook",
+      "type": "social_media",
+      "api_endpoint": "https://graph.facebook.com",
+      "rate_limit": 200
+    }
+  ],
+  "source_weights": {
+    "official": 1.0,
+    "news": 0.8,
+    "ngo": 0.85,
+    "social_media": 0.5
+  },
+  "reliability_ratings": {
+    "nec": "high",
+    "unmiss": "high",
+    "fes": "high",
+    "peacerep": "high",
+    "xinhua": "medium",
+    "anadolu": "medium",
+    "radiotamazuj": "medium",
+    "twitter": "low",
+    "facebook": "low"
+  },
+  "keywords": {
+    "election_related": [
+      "election",
+      "vote",
+      "ballot",
+      "poll",
+      "candidate",
+      "party",
+      "register",
+      "voter",
+      "democracy",
+      "transition"
+    ],
+    "security_related": [
+      "peace",
+      "security",
+      "violence",
+      "conflict",
+      "stable",
+      "unrest",
+      "peacekeeping",
+      "force",
+      "military"
+    ],
+    "political_related": [
+      "kiir",
+      "machar",
+      "splm",
+      "splm-io",
+      "ssoa",
+      "government",
+      "opposition",
+      "negotiation",
+      "dialogue"
+    ],
+    "technical_related": [
+      "registration",
+      "funding",
+      "budget",
+      "timeline",
+      "readiness",
+      "preparedness",
+      "logistics",
+      "infrastructure"
+    ]
+  }
+}

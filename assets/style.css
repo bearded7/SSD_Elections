@@ -1,0 +1,63 @@
+/* Custom styling for South Sudan Election Monitor */
+
+body {
+    background-color: #f8f9fa;
+}
+
+.card {
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    border: none;
+    margin-bottom: 20px;
+}
+
+.card-header {
+    background-color: #2c3e50;
+    color: white;
+    font-weight: bold;
+}
+
+.badge {
+    font-size: 0.7rem;
+    padding: 0.3rem 0.6rem;
+}
+
+.list-group-item {
+    background-color: transparent;
+    border-left: none;
+    border-right: none;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .container-fluid {
+        padding: 10px;
+    }
+}
+
+/* Custom colors */
+.text-primary {
+    color: #3498db !important;
+}
+
+.bg-primary {
+    background-color: #3498db !important;
+}
+
+.text-success {
+    color: #2ecc71 !important;
+}
+
+.text-warning {
+    color: #f39c12 !important;
+}
+
+.text-info {
+    color: #1abc9c !important;
+}
+
+/* Footer styling */
+.footer {
+    margin-top: 40px;
+    padding: 20px 0;
+    border-top: 1px solid #dee2e6;
+}
